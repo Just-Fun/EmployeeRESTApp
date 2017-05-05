@@ -1,5 +1,3 @@
-/* Copyright © 2017 Oracle and/or its affiliates. All rights reserved. */
-
 package ua.com.serzh;
 
 import java.util.List;
@@ -18,11 +16,11 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
     @Override
     public Employee getEmployee(long id){
-        Employee match = null;
+        Employee match;
                 
         match = eList.stream()
                     .filter(e -> e.getId() == id)
-                    .findFirst().orElse(match);
+                    .findFirst().orElse(null);
         
         return match;        
     }
@@ -30,35 +28,28 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
     @Override
     public List<Employee> getByLastName(String name){
-        
-       List<Employee> matchList = 
-            eList.stream()
-                .filter((e) -> (e.getLastName().contains(name)))
-                .collect(Collectors.toList());
-         
-        return matchList;
+
+        return eList.stream()
+            .filter((e) -> (e.getLastName().contains(name)))
+            .collect(Collectors.toList());
     }
     
     
     @Override
     public List<Employee> getByTitle(String title){
-        List<Employee> matchList = 
-            eList.stream()
-                .filter((e) -> (e.getTitle().contains(title)))
-                .collect(Collectors.toList());
-        
-        return matchList;
+
+        return eList.stream()
+            .filter((e) -> (e.getTitle().contains(title)))
+            .collect(Collectors.toList());
     }
 
     
     @Override
     public List<Employee> getByDept(String dept){
-        List<Employee> matchList = 
-            eList.stream()
-                .filter((e) -> (e.getDept().contains(dept)))
-                .collect(Collectors.toList());
-        
-        return matchList;
+
+        return eList.stream()
+            .filter((e) -> (e.getDept().contains(dept)))
+            .collect(Collectors.toList());
     }
     
     
@@ -83,7 +74,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
         matchIndex = eList.stream()
                     .filter(e -> e.getId() == id)
                     .findFirst()
-                    .map(e -> eList.indexOf(e))
+                    .map(eList::indexOf)
                     .orElse(matchIndex);
                
         if (matchIndex > -1){
@@ -103,7 +94,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
         matchIndex = eList.stream()
                     .filter(e -> e.getId() == id)
                     .findFirst()
-                    .map(e -> eList.indexOf(e))
+                    .map(eList::indexOf)
                     .orElse(matchIndex);
                 
         if (matchIndex > -1){

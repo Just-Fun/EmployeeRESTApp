@@ -1,5 +1,3 @@
-/* Copyright © 2017 Oracle and/or its affiliates. All rights reserved. */
-
 package ua.com.serzh;
 
 import org.springframework.http.HttpStatus;
@@ -29,9 +27,11 @@ public class EmployeeController {
         match = edao.getEmployee(id);
 
         if (match != null) {
-            return new ResponseEntity<>(match, HttpStatus.OK);
+//            return new ResponseEntity<>(match, HttpStatus.OK);
+            return ResponseEntity.ok(match);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound();
         }
     }
 

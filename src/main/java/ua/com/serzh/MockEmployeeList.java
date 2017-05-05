@@ -1,5 +1,3 @@
-/* Copyright © 2017 Oracle and/or its affiliates. All rights reserved. */
-
 package ua.com.serzh;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
