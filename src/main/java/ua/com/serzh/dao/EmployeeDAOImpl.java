@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
-//@Repository("EmployeeDAO")
+@Repository("EmployeeDAO")
 public class EmployeeDAOImpl implements EmployeeDAO{
     
     private final CopyOnWriteArrayList<Employee> eList = MockEmployeeList.getInstance();
