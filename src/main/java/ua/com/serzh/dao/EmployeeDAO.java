@@ -1,6 +1,8 @@
 /* Copyright © 2017 Oracle and/or its affiliates. All rights reserved. */
 
-package ua.com.serzh;
+package ua.com.serzh.dao;
+
+import ua.com.serzh.entity.Employee;
 
 import java.util.List;
 

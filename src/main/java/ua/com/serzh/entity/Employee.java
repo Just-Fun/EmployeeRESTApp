@@ -1,7 +1,10 @@
 /* Copyright © 2017 Oracle and/or its affiliates. All rights reserved. */
 
-package ua.com.serzh;
+package ua.com.serzh.entity;
 
+import lombok.Data;
+
+//@Data
 public class Employee {
   private final long id;
   private final String firstName;

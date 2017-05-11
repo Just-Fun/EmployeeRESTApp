@@ -21,7 +21,6 @@ public class EmployeeRestAppApplication {
     }
 
     public static void main(String[] args) {
-//		SpringApplication.run(EmployeeRestAppApplication.class, args);
         // Set properties
         myProps.setProperty("server.address", host.orElse("localhost"));
         myProps.setProperty("server.port", port.orElse("8083"));

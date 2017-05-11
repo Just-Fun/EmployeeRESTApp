@@ -1,9 +1,14 @@
-package ua.com.serzh;
+package ua.com.serzh.dao;
+
+import org.springframework.stereotype.Repository;
+import ua.com.serzh.MockEmployeeList;
+import ua.com.serzh.entity.Employee;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
+//@Repository("EmployeeDAO")
 public class EmployeeDAOImpl implements EmployeeDAO{
     
     private final CopyOnWriteArrayList<Employee> eList = MockEmployeeList.getInstance();

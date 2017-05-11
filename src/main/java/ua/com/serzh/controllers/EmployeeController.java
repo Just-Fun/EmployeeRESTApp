@@ -1,8 +1,11 @@
-package ua.com.serzh;
+package ua.com.serzh.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.com.serzh.entity.Employee;
+import ua.com.serzh.dao.EmployeeDAO;
+import ua.com.serzh.dao.EmployeeDAOImpl;
 
 import java.util.List;
 
@@ -11,12 +14,12 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    EmployeeDAO edao = new EmployeeDAOImpl();
+    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
     // Get all employees
     @RequestMapping(method = RequestMethod.GET)
     public Employee[] getAll() {
-        return edao.getAllEmployees().toArray(new Employee[0]);
+        return employeeDAO.getAllEmployees().toArray(new Employee[0]);
     }
 
     // Get an employee
@@ -24,14 +27,14 @@ public class EmployeeController {
     public ResponseEntity get(@PathVariable long id) {
 
         Employee match = null;
-        match = edao.getEmployee(id);
+        match = employeeDAO.getEmployee(id);
 
         if (match != null) {
 //            return new ResponseEntity<>(match, HttpStatus.OK);
             return ResponseEntity.ok(match);
         } else {
-//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            return ResponseEntity.notFound();
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//            return ResponseEntity.notFound();
         }
     }
 
@@ -39,7 +42,7 @@ public class EmployeeController {
     @RequestMapping(method = RequestMethod.GET, value = "/lastname/{name}")
     public ResponseEntity getByLastName(@PathVariable String name) {
 
-        List<Employee> matchList = edao.getByLastName(name);
+        List<Employee> matchList = employeeDAO.getByLastName(name);
 
         if (matchList.size() > 0) {
             return new ResponseEntity<>(matchList.toArray(new Employee[0]), HttpStatus.OK);
@@ -53,7 +56,7 @@ public class EmployeeController {
     @RequestMapping(method = RequestMethod.GET, value = "/title/{name}")
     public ResponseEntity getByTitle(@PathVariable String name) {
 
-        List<Employee> matchList = edao.getByTitle(name);
+        List<Employee> matchList = employeeDAO.getByTitle(name);
 
         if (matchList.size() > 0) {
             return new ResponseEntity<>(matchList.toArray(new Employee[0]), HttpStatus.OK);
@@ -66,7 +69,7 @@ public class EmployeeController {
     @RequestMapping(method = RequestMethod.GET, value = "/department/{name}")
     public ResponseEntity getByDept(@PathVariable String name) {
 
-        List<Employee> matchList = edao.getByDept(name);
+        List<Employee> matchList = employeeDAO.getByDept(name);
 
         if (matchList.size() > 0) {
             return new ResponseEntity<>(matchList.toArray(new Employee[0]), HttpStatus.OK);
@@ -78,7 +81,7 @@ public class EmployeeController {
     // Add an employee
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity add(@RequestBody Employee employee) {
-        if (edao.add(employee)) {
+        if (employeeDAO.add(employee)) {
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,7 +92,7 @@ public class EmployeeController {
     @RequestMapping(method = RequestMethod.PUT, value = "{id}")
     public ResponseEntity update(@PathVariable long id, @RequestBody Employee employee) {
 
-        if (edao.update(id, employee)) {
+        if (employeeDAO.update(id, employee)) {
             return new ResponseEntity<>(null, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -100,7 +103,7 @@ public class EmployeeController {
     @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
     public ResponseEntity delete(@PathVariable long id) {
 
-        boolean result = edao.delete(id);
+        boolean result = employeeDAO.delete(id);
 
         if (result) {
             return new ResponseEntity<>(null, HttpStatus.OK);
