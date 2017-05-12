@@ -1,0 +1,2 @@
+#if you run multiple servers locally at the same time
+server.port: 9999
